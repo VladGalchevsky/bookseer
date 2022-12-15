@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+<div class="row" id="content-columns">
+  <div class="col-sm-12" id="content-column">
+    <div class="alert alert-warning" role="alert">
+      A simple warning alert—check it out!
+    </div>
+    <div class="d-flex justify-content-start">
+      <a class="btn btn-primary me-2" href="#" role="button">Додати книгу</a>
+      <button class="btn btn-success me-2" type="submit">Пошук</button>
+      <form class="form-inline">
+        <input class="form-control" type="search" placeholder="Пошук" aria-label="Search">
+      </form>
+    </div>
+  </div>
+</div>
+<br>
+<table class="table table-hover">
+  <tbody>
+    <tr>
+      <td>№</td>
+      <td>Назва книги</td>
+      <td>Фото</td>
+      <td>Пагінець</td>
+      <td>Формат</td>
+    </tr>
+</table>
+
+{% endblock content %}
