@@ -18,9 +18,15 @@ from django.urls import path
 
 from books.views import (
     books_list,
+    books_add,
+    books_edit,
+    books_delete,
 )
 
 urlpatterns = [
-    path('', books_list, name='home'),
+    path('', books_list, name='books_list'),
+    path('books/add/', books_add, name='books_add'),
+    path('books/<int:sid>/edit/', books_edit, name='books_edit'),
+    path('books/<int:sid>/delete/', books_delete, name='books_delete'),
     path('admin/', admin.site.urls),
 ]

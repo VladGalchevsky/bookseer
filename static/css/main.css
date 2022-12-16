@@ -1,0 +1,13 @@
+.alert {
+    /*
+    Відстань зверху 10px
+    Відстань справа 0px
+    Відстань знизу 5px
+    Відстань зліва 0px
+    */
+    margin: 10px 0 5px 0;
+}
+
+.table td {
+    vertical-align: middle;
+}
