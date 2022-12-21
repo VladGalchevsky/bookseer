@@ -24,7 +24,7 @@
       <th>№</th>
       <th>Назва</th>
       <th>Фото</th>
-      <th>Пагінець</th>
+      <th>Корешок</th>
       <th>Формат</th>
       <th>Закладка</th>
       <th>Форзац</th>
@@ -32,9 +32,10 @@
     </tr>
   </thead>
   <tbody>
-    <td>1</td>
+    {% for book in books %}
+    <td>{{ forloop.counter }}</td>
     <td>Назва</td>
-    <td><img src="img/visual_cover.png" height="35" 2 width="35" class="rounded-circle" /></td>
+    <td><img src="{% static book.image %}" height="35" 2 width="35" class="rounded-circle" /></td>
     <td>Пагінець</td>
     <td>Формат</td>
     <td>Закладка</td>
@@ -52,6 +53,7 @@
       </div>
     </td>
   </tbody>
+  {% endfor %}
 </table>
 
 {% endblock content %}
