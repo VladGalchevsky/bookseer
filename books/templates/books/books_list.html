@@ -3,6 +3,15 @@
 {% load static %}
 {% block content %}
 
+<style type="text/css">
+  .circle {
+    width: 60px;
+    height: 40px;
+    border-radius: 20%;
+    padding: 5px;
+  }
+</style>
+
 <div class="row" id="content-columns">
   <div class="col-sm-12" id="content-column">
     <div class="alert alert-warning" role="alert">
@@ -23,35 +32,48 @@
     <tr>
       <th>№</th>
       <th>Назва</th>
-      <th>Фото</th>
-      <th>Корешок</th>
       <th>Формат</th>
+      <th>Корешок</th>
       <th>Закладка</th>
-      <th>Форзац</th>
+      <th>Каптал</th>
+      <th>Фото</th>
       <th>Дії</th>
     </tr>
   </thead>
   <tbody>
     {% for book in books %}
-    <td>{{ forloop.counter }}</td>
-    <td>Назва</td>
-    <td><img src="{% static book.image %}" height="35" 2 width="35" class="rounded-circle" /></td>
-    <td>Пагінець</td>
-    <td>Формат</td>
-    <td>Закладка</td>
-    <td>Форзац</td>
-    <td>
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-          aria-expanded="false">
-          Дія
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="{% url 'books_edit' 12 %}">Редагувати</a></li>
-          <li><a class="dropdown-item" href="{% url 'books_delete' 13 %}">Видалити</a></li>
-      </div>
-      </div>
-    </td>
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td><a href="{% url 'books_edit' book.id %}">{{ book.name }}</a></td>
+      <td><a href="{% url 'books_edit' book.id %}">{{ book.format }}</a></td>
+      <td><a href="{% url 'books_edit' book.id %}">{{ book.root }}</a></td>
+
+      <td class="bookmark">
+        <a href="{% url 'books_edit' book.id %}">
+          <div class="circle" style="background-color: {{ book.bookmark }}"></div>
+        </a>
+      </td>
+
+      <td class="captal">
+        <a href="{% url 'books_edit' book.id %}">
+          <div class="circle" style="background-color: {{ book.captal }}"></div>
+        </a>
+      </td>
+
+      <td><img src="{% static book.image %}" height="35" 2 width="35" class="rounded-circle" /></td>
+      <td>
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Дія
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="{% url 'books_edit' book.id %}">Редагувати</a></li>
+            <li><a class="dropdown-item" href="{% url 'books_delete' book.id %}">Видалити</a></li>
+        </div>
+        </div>
+      </td>
+    </tr>
   </tbody>
   {% endfor %}
 </table>
