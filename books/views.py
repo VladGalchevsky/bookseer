@@ -8,6 +8,12 @@ from books.models import Books
 
 def books_list(request):
     books = Books.objects.all()
+    # try to order students list
+    order_by = request.GET.get('order_by', '')
+    if order_by in ('name', 'format', 'root'):
+        books = books.order_by(order_by)
+        if request.GET.get('reverse', '') == '1':
+            books = books.reverse()
     return render(request, 'books/books_list.html', {'books': books})
 
 

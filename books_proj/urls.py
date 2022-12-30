@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 
 from books.views import (
     books_list,
@@ -31,4 +33,4 @@ urlpatterns = [
     path('books/<int:sid>/delete/', books_delete, name='books_delete'),
     path('contact-admin/', contact_admin, name='contact_admin'),
     path('admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
