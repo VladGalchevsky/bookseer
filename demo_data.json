@@ -1,0 +1,153 @@
+[
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$260000$yPuMeuxo1KcTAmweUxq3Ua$96hH7uUEVdcfvC4K44FdZe48MP8rT8DjkFX91AyBuYk=",
+        "last_login": "2023-04-24T17:04:10.215Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "galchunia97@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-04-24T17:03:18.708Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "ob3tokmhti637jjf10pd92kx8wejrstn",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQBe_iGllrr3-hpOcM1vqHA8iW4qRC3B0ipYD2zcx7MU_bWv028uLnxM5MsNPvFig-cttBulO7dR57W5c58F3hBx382lN-Xg7376DSqN9aW1skxIC6UEGyRirEyWEAciInAiVAYFbGKpmMdTaAlgigwIQ4pcjeH8JmNsk:1pqzbm:hwRM3UDTvJxQMinVYLx_HuuMpCNUsjsALmFjJiOmty8",
+        "expire_date": "2023-05-08T17:04:10.348Z"
+    }
+},
+{
+    "model": "books.books",
+    "pk": 1,
+    "fields": {
+        "name": "Прочь из замкнутого круга",
+        "format": "А5",
+        "root": "2.1",
+        "bookmark": "#FFFFFF",
+        "captal": "#FFFFFF",
+        "photo": ""
+    }
+},
+{
+    "model": "books.books",
+    "pk": 2,
+    "fields": {
+        "name": "Вкус праздника",
+        "format": "B5",
+        "root": "0.8",
+        "bookmark": "#FFFFFF",
+        "captal": "#FFFFFF",
+        "photo": ""
+    }
+},
+{
+    "model": "books.books",
+    "pk": 3,
+    "fields": {
+        "name": "ааааа",
+        "format": "А5",
+        "root": "2.1",
+        "bookmark": "#e61414",
+        "captal": "#e51f1f",
+        "photo": ""
+    }
+},
+{
+    "model": "books.books",
+    "pk": 4,
+    "fields": {
+        "name": "ааааа",
+        "format": "А5",
+        "root": "2.1",
+        "bookmark": "#ad1414",
+        "captal": "#2de130",
+        "photo": ""
+    }
+},
+{
+    "model": "books.books",
+    "pk": 5,
+    "fields": {
+        "name": "ffff",
+        "format": "B5",
+        "root": "2.1",
+        "bookmark": "#0ca3e4",
+        "captal": "#1b93ee",
+        "photo": "default_book.png"
+    }
+},
+{
+    "model": "books.books",
+    "pk": 6,
+    "fields": {
+        "name": "eee",
+        "format": "А5",
+        "root": "2.1",
+        "bookmark": "#cc2828",
+        "captal": "#d72828",
+        "photo": "Free_Sample_By_Wix.jpg"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2023-04-24T17:13:22.183Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "books",
+            "books"
+        ],
+        "object_id": "1",
+        "object_repr": "Books object (1)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2023-04-24T17:23:59.698Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "books",
+            "books"
+        ],
+        "object_id": "2",
+        "object_repr": "Вкус праздника | B5 | 0.8",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2023-04-24T17:37:52.466Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "books",
+            "books"
+        ],
+        "object_id": "1",
+        "object_repr": "Прочь из замкнутого круга | А5 | 2.1",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"\\u041a\\u043e\\u043c\\u0435\\u043d\\u0442\\u0430\\u0440\"]}}]"
+    }
+}
+]
