@@ -1,5 +1,5 @@
 from django.db import models
-
+from colorful.fields import RGBColorField
 
 class Books(models.Model):
     name = models.CharField(max_length=256, blank=False, verbose_name="Назва")
@@ -7,10 +7,8 @@ class Books(models.Model):
                               verbose_name="Формат")
     root = models.CharField(max_length=60, blank=False,
                             verbose_name="Корешок")
-    bookmark = models.CharField(max_length=20, blank=True, default='#FFFFFF',
-                                verbose_name="Закладка")
-    captal = models.CharField(max_length=20, blank=True, default='#FFFFFF',
-                              verbose_name="Каптал")
+    bookmark = RGBColorField(blank=True, null=True, verbose_name="Закладка")
+    captal = RGBColorField(blank=True, null=True, verbose_name="Каптал")
     photo = models.ImageField(blank=True, verbose_name="Фото", null=True)
 
     class Meta:

@@ -14,9 +14,6 @@
 
 <div class="row" id="content-columns">
   <div class="col-sm-12" id="content-column">
-    <div class="alert alert-warning" role="alert">
-      A simple warning alert—check it out!
-    </div>
     <div class="d-flex justify-content-start">
       <a class="btn btn-primary me-2" href="{% url 'books_add' %}" role="button">Додати книгу</a>
       <button class="btn btn-success me-2" type="submit">Пошук</button>
@@ -96,7 +93,7 @@
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" href="{% url 'books_edit' book.id %}">Редагувати</a></li>
-            <li><a class="dropdown-item" href="{% url 'books_delete' book.id %}">Видалити</a></li>
+            <li><a class="dropdown-item" href="#">Видалити</a></li>
         </div>
         </div>
       </td>

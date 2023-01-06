@@ -18,19 +18,18 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 
-from books.views import (
+from books.views.contact_admin import ContactAdminView
+from books.views.books import (
     books_list,
-    books_add,
-    books_edit,
-    books_delete,
-    contact_admin,
+    BooksAddView,
+    BooksUpdateView,
 )
+
 
 urlpatterns = [
     path('', books_list, name='books_list'),
-    path('books/add/', books_add, name='books_add'),
-    path('books/<int:sid>/edit/', books_edit, name='books_edit'),
-    path('books/<int:sid>/delete/', books_delete, name='books_delete'),
-    path('contact-admin/', contact_admin, name='contact_admin'),
+    path('books/add/', BooksAddView.as_view(), name='books_add'),
+    path('books/<int:pk>/edit/', BooksUpdateView.as_view(), name='books_edit'),
+    path('contact-admin/', ContactAdminView.as_view(), name='contact_admin'),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

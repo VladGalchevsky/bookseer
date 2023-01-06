@@ -1,34 +1,27 @@
 {% extends "base.html" %}
 {% load static %}
+
+{% block status_message %}
+{% if form.errors %}
+<div class="alert alert-warning" role="alert">Будь ласка, виправте наступні помилки</div>
+{% endif %}
+{% endblock %}
+
 {% block content %}
-<form action="{% url 'books_add' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
-  <div>
-    <label for="name">Назва*</label>
-    <input type="text" value="{{ request.POST.name }}" name="name" id="name" />
+<form action="{% url 'books_add' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {% for field in form %}
+  <div class="form-group">
+    {{ field.label_tag }}
+    {% if field.name == 'bookmark' or field.name == 'captal' %}
+    <input type="color" name="{{ field.name }}" value="{{ field.value }}" class="color-picker"
+      {% if field.value %}style="background-color: {{ field.value }};" {% endif %}>
+    {% else %}
+    {{ field }}
+    {% endif %}
   </div>
-  <div>
-    <label for="format">Формат*</label>
-    <input type="text" value="{{ request.POST.format }}" name="format" id="format" />
-  </div>
-  <div>
-    <label for="root">Корешок*</label>
-    <input type="text" value="{{ request.POST.root }}" name="root" id="root" />
-  </div>
-  <div>
-    <label for="bookmark">Закладка</label>
-    <input type="color" value="#FFFFFF" name="bookmark" id="bookmark" />
-  </div>
-  <div>
-    <label for="captal">Каптал</label>
-    <input type="color" value="#FFFFFF" name="captal" id="captal" />
-  </div>
-  <div>
-    <label for="photo">Фото</label>
-    <input type="file" value="" name="photo" id="photo" />
-  </div>
-  <div>
-    <input type="submit" value="Додати" name="add_button" />
-    <button type="submit" name="cancel_button">Скасувати</button>
-  </div>
+  {% endfor %}
+  <input type="submit" value="Зберегти" name="add_button" class="btn btn-primary" />
+  <a href="{% url 'books_list' %}" class="btn btn-link">Скасувати</a>
 </form>
 {% endblock content %}
