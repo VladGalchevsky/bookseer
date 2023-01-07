@@ -1,12 +1,12 @@
 from django import forms
 from .models import Books
-from colorfield.widgets import ColorWidget
 
-from colorful.forms import RGBColorField
 
 class BooksForm(forms.ModelForm):
-    bookmark = RGBColorField(required=False, widget=ColorWidget)
-    captal = RGBColorField(required=False, widget=ColorWidget)
+    bookmark = forms.CharField(required=False, 
+                               widget=forms.TextInput(attrs={'type': 'color'}))
+    captal = forms.CharField(required=False, 
+                             widget=forms.TextInput(attrs={'type': 'color'}))
 
     class Meta:
         model = Books
@@ -14,5 +14,10 @@ class BooksForm(forms.ModelForm):
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.initial['bookmark'] = '#FFFFFF'  # Встановлюємо білий колір за замовчуванням
-        self.initial['captal'] = '#FFFFFF'  # Встановлюємо білий колір за замовчуванням
+        instance = kwargs.get('instance')
+        if instance:
+            self.initial['bookmark'] = instance.bookmark
+            self.initial['captal'] = instance.captal
+        else:
+            self.initial['bookmark'] = '#FFFFFF'  # Встановлюємо білий колір за замовчуванням
+            self.initial['captal'] = '#FFFFFF'  # Встановлюємо білий колір за замовчуванням

@@ -23,6 +23,7 @@ from books.views.books import (
     books_list,
     BooksAddView,
     BooksUpdateView,
+    BooksDeleteView,
 )
 
 
@@ -30,6 +31,8 @@ urlpatterns = [
     path('', books_list, name='books_list'),
     path('books/add/', BooksAddView.as_view(), name='books_add'),
     path('books/<int:pk>/edit/', BooksUpdateView.as_view(), name='books_edit'),
+    path('books/<int:pk>/delete/', BooksDeleteView.as_view(),
+         name='books_delete'),
     path('contact-admin/', ContactAdminView.as_view(), name='contact_admin'),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

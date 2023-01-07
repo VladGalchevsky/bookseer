@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<form action="{% url 'books_delete' object.id %}" method="post">
+    {% csrf_token %}
+    <p>Ви дійсно хочете видалити книгу "{{ object }}"?</p>
+    <input type="submit" value="Так" name="delete_button" class="btn btn-danger" /><br /><br />
+</form>
+{% endblock content %}

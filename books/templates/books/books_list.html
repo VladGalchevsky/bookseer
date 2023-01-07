@@ -93,7 +93,7 @@
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" href="{% url 'books_edit' book.id %}">Редагувати</a></li>
-            <li><a class="dropdown-item" href="#">Видалити</a></li>
+            <li><a class="dropdown-item" href="{% url 'books_delete' book.id %}">Видалити</a></li>
         </div>
         </div>
       </td>

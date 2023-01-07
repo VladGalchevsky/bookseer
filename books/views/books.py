@@ -1,11 +1,8 @@
-from typing import Any
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.urls import reverse, reverse_lazy
-from django.views.generic import UpdateView, CreateView
-from django.forms import widgets
+from django.views.generic import UpdateView, CreateView, DeleteView
 
 from books.models import Books
 from books.forms import BooksForm
@@ -23,7 +20,7 @@ def books_list(request):
             books = books.reverse()
             
     # paginate books
-    paginator = Paginator(books, 5)
+    paginator = Paginator(books, 10)
     page = request.GET.get('page')
     try:
         books = paginator.page(page)
@@ -41,7 +38,7 @@ def books_list(request):
 class BooksAddView(CreateView):
     model = Books
     form_class = BooksForm
-    template_name = 'books/books_add.html'
+    template_name = 'books/books_form.html'
     success_url = reverse_lazy('books_list')
 
     def form_valid(self, form):
@@ -73,34 +70,41 @@ class BooksAddView(CreateView):
     def form_invalid(self, form):
         # Render the template with form errors
         return self.render_to_response(self.get_context_data(form=form))
-        
-    def get_success_url(self) -> str:
-        return f"{reverse('books_list')}?status_message=Книгу успішно збережено!"
-    
-    def post(self, request, *args, **kwargs):
-        if request.POST.get('cancel_button'):
-            messages.success(request, 'Додавання книги скасовано!')
-            return redirect('books_list')
-        else:
-            return super().post(request, *args, **kwargs)
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Add any additional context variables if needed
         return context
+    
 
 
 class BooksUpdateView(UpdateView):
     model = Books
-    fields = '__all__'
-    template_name = 'books/books_edit.html'
+    template_name = 'books/books_form.html'
+    form_class = BooksForm
+    success_url = reverse_lazy('books_list')
 
-    def get_success_url(self) -> str:
-        return f"{reverse('books_list')}?status_message=Книгу успішно збережено!"
-    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, 'Книгу успішно відредаговано!')
+        return response
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Помилка при редагуванні книги.')
+        return super().form_invalid(form)
+
     def post(self, request, *args, **kwargs):
         if request.POST.get('cancel_button'):
-            return HttpResponseRedirect(
-                f"{reverse('books_list')}?status_message=Книгу успішно збережено!")
+            messages.info(request, 'Редагування книги скасовано.')
+            return redirect('books_list')
         else:
             return super().post(request, *args, **kwargs)
+        
+
+class BooksDeleteView(DeleteView):
+    model = Books
+    template_name = 'books/books_confirm_delete.html'
+
+    def get_success_url(self):
+        return '%s?status_message=Книгу успішно видалено!' % reverse('books_list')
+    

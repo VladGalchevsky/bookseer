@@ -7,3 +7,11 @@
     */
     margin: 10px 0 5px 0;
 }
+
+.my-custom-message {
+    background-color: #dff0d8;
+    border-color: #d0e9c6;
+    color: #3c763d;
+    padding: 10px;
+    margin-bottom: 10px;
+}
