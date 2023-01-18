@@ -12,6 +12,11 @@ from PIL import Image
 
 def books_list(request):
     books = Books.objects.all()
+    search_query = request.GET.get('search')
+    
+    if search_query:
+        books = books.filter(name__icontains=search_query)
+        
     # try to order students list
     order_by = request.GET.get('order_by', '')
     if order_by in ('name', 'format', 'root'):

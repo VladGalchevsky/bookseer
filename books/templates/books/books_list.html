@@ -14,11 +14,13 @@
 
 <div class="row" id="content-columns">
   <div class="col-sm-12" id="content-column">
-    <div class="d-flex justify-content-start">
+    <div class="d-flex justify-content-start align-items-center mb-3">
       <a class="btn btn-primary me-2" href="{% url 'books_add' %}" role="button">Додати книгу</a>
-      <button class="btn btn-success me-2" type="submit">Пошук</button>
-      <form class="form-inline">
-        <input class="form-control" type="search" placeholder="Пошук" aria-label="Search">
+      <form class="form-inline" method="GET" action="{% url 'books_list' %}">
+        <div class="input-group">
+          <input class="form-control" type="search" name="search" placeholder="Пошук" aria-label="Search">
+          <button class="btn btn-success" type="submit">Пошук</button>
+        </div>
       </form>
     </div>
   </div>
@@ -63,9 +65,9 @@
     {% for book in books %}
     <tr>
       <td>{{ forloop.counter }}</td>
-      <td><a href="{% url 'books_edit' book.id %}">{{ book.name }}</a></td>
-      <td><a href="{% url 'books_edit' book.id %}">{{ book.format }}</a></td>
-      <td><a href="{% url 'books_edit' book.id %}">{{ book.root }}</a></td>
+      <td><a href="{% url 'books_edit' book.id %}" class="book-edit-form-link">{{ book.name }}</a></td>
+      <td><a href="{% url 'books_edit' book.id %}" class="book-edit-form-link">{{ book.format }}</a></td>
+      <td><a href="{% url 'books_edit' book.id %}" class="book-edit-form-link">{{ book.root }}</a></td>
 
       <td class="bookmark">
         <a href="{% url 'books_edit' book.id %}">
@@ -92,7 +94,7 @@
             Дія
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="{% url 'books_edit' book.id %}">Редагувати</a></li>
+            <li><a class="dropdown-item book-edit-form-link" href="{% url 'books_edit' book.id %}">Редагувати</a></li>
             <li><a class="dropdown-item" href="{% url 'books_delete' book.id %}">Видалити</a></li>
         </div>
         </div>

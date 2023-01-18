@@ -1,3 +1,4 @@
+import logging
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -46,6 +47,8 @@ class ContactAdminView(FormView):
             send_mail(subject, message, from_email, [settings.ADMIN_EMAIL])
         except Exception:
             message = 'Під час відправки листа виникла непередбачувана помилка. Спробуйте скористатись даною формою пізніше.'
+            logger = logging.getLogger(__name__)
+            logger.exception(message)
         else:
             message = 'Повідомлення успішно надіслане!'
         return HttpResponseRedirect(self.get_success_url() + f'?status_message={message}')
