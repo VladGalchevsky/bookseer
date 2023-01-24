@@ -57,7 +57,7 @@
       <th>Закладка</th>
       <th>Каптал</th>
       <th>Фото</th>
-      <th>Дії</th>
+      <th></th>
     </tr>
   </thead>
   {% endwith %}
@@ -88,16 +88,7 @@
         {% endif %}
       </td>
       <td>
-        <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Дія
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item book-edit-form-link" href="{% url 'books_edit' book.id %}">Редагувати</a></li>
-            <li><a class="dropdown-item" href="{% url 'books_delete' book.id %}">Видалити</a></li>
-        </div>
-        </div>
+        <a href="{% url 'books_delete' book.id %}" class="btn btn-danger">Видалити</a>
       </td>
     </tr>
   </tbody>

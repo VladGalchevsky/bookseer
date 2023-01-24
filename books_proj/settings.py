@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
+from allauth.account import app_settings as allauth_settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,7 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    
+    'django_smtp_ssl',
+    
     'crispy_forms',
+    'allauth',
+    'allauth.account',
+    
     'books',
 ]
 
@@ -134,7 +142,6 @@ PORTAL_URL = 'http://localhost:8000'
 
 # email settings
 from .email import (
-    ADMIN_EMAIL,
     EMAIL_BACKEND,
     EMAIL_HOST,
     EMAIL_PORT,
@@ -191,3 +198,21 @@ LOGGING = {
         }
     }
 }
+
+AUTHENTICATION_BACKENDS = [
+# Needed to login by username in Django admin, regardless of `allauth`
+'django.contrib.auth.backends.ModelBackend',
+
+# `allauth` specific authentication methods, such as login by e-mail
+'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = 'books_list'
+
+ACCOUNT_LOGOUT_ON_GET = True
+
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_CONFIRMATION_SUBJECT = 'Підтвердження електронної пошти'
+ACCOUNT_EMAIL_CONFIRMATION_MESSAGE = 'Будь ласка, перейдіть за посиланням нижче для підтвердження вашої електронної пошти:\n\n{0}'

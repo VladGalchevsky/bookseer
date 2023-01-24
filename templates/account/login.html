@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Форма логування</h3>
+<form action="{% url 'account_login' %}" method="POST">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-md-4">
+      <div class="mb-3">
+        <label for="login" class="form-label">Користувач</label>
+        <input type="text" class="form-control {% if form.login.errors %}is-invalid{% endif %}" id="login"
+          value="{{ form.login.value }}" name="login" />
+        {% if form.login.errors %}
+        <div class="invalid-feedback">
+          {% for error in form.login.errors %}
+          {{ error }}
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="mb-3">
+        <label for="password" class="form-label">Пароль</label>
+        <input type="password" class="form-control {% if form.password.errors %}is-invalid{% endif %}" id="password"
+          value="" name="password" />
+        {% if form.password.errors %}
+        <div class="invalid-feedback">
+          {% for error in form.password.errors %}
+          {{ error }}
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% if status %}
+  <div class="alert alert-{{ status.level_tag }}">
+    {{ status.message }}
+  </div>
+  {% endif %}
+  <button type="submit" class="btn btn-primary">Увійти</button>
+</form>
+{% endblock content %}

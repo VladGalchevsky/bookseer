@@ -9,6 +9,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link {% if request.resolver_match.url_name == 'books_list' %}active{% endif %}"
             aria-current="page" href="{% url 'books_list' %}">Книги</a>
@@ -17,6 +18,21 @@
           <a class="nav-link {% if '/contact-admin' in request.path %}active{% endif %}"
             href="{% url 'contact_admin' %}">Контакт</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'account_logout' %}">Вийти</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'books_list' %}active{% endif %}"
+            aria-current="page" href="{% url 'books_list' %}">Книги</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'account_login' %}">Увійти</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'account_signup' %}">Реєстрація</a>
+        </li>
+        {% endif %}
       </ul>
     </div>
   </div>
