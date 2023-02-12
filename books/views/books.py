@@ -3,6 +3,8 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.urls import reverse, reverse_lazy
 from django.views.generic import UpdateView, CreateView, DeleteView
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 from books.models import Books
 from books.forms import BooksForm
@@ -81,6 +83,9 @@ class BooksAddView(CreateView):
         # Add any additional context variables if needed
         return context
     
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
 class BooksUpdateView(UpdateView):
@@ -105,6 +110,10 @@ class BooksUpdateView(UpdateView):
         else:
             return super().post(request, *args, **kwargs)
         
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+        
 
 class BooksDeleteView(DeleteView):
     model = Books
@@ -112,4 +121,8 @@ class BooksDeleteView(DeleteView):
 
     def get_success_url(self):
         return '%s?status_message=Книгу успішно видалено!' % reverse('books_list')
+    
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
     

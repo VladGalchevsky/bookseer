@@ -17,6 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
+
+from allauth.socialaccount.providers.google import views as google_views
 
 from books.views.contact_admin import ContactAdminView
 from books.views.books import (
@@ -28,7 +32,11 @@ from books.views.books import (
 
 
 urlpatterns = [
+    path('accounts/profile/', login_required(TemplateView.as_view(
+        template_name='account/profile.html')), name='profile'),
     path('accounts/', include('allauth.urls')),
+    path('accounts/google/login/', google_views.oauth2_login, name='google_login'),
+    path('accounts/google/callback/', google_views.oauth2_callback, name='google_callback'),
     path('', books_list, name='books_list'),
     path('books/add/', BooksAddView.as_view(), name='books_add'),
     path('books/<int:pk>/edit/', BooksUpdateView.as_view(), name='books_edit'),

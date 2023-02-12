@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
@@ -19,12 +20,20 @@
             href="{% url 'contact_admin' %}">Контакт</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'account_logout' %}">Вийти</a>
+          <div class="col-sm-2 text-right my-auto" id="user-toolbar">
+            <a href="{% url "profile" %}">{{ user.get_full_name|default:user.username }}</a>
+            <a class="nav-link" href="{% url 'account_logout' %}">Вийти</a>
+          </div>
         </li>
         {% else %}
         <li class="nav-item">
           <a class="nav-link {% if request.resolver_match.url_name == 'books_list' %}active{% endif %}"
             aria-current="page" href="{% url 'books_list' %}">Книги</a>
+        </li>
+        <li class="nav-item">
+        <li class="nav-item">
+          <a href="{% provider_login_url "facebook" method="oauth2" next=request.path %}">Увійти через Facebook</a>
+        </li>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'account_login' %}">Увійти</a>
