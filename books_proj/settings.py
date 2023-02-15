@@ -13,21 +13,32 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 from allauth.account import app_settings as allauth_settings
-
+from venv_settings import SECRET_KEY
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+# email settings
+from venv_settings import (
+    EMAIL_BACKEND,
+    EMAIL_HOST,
+    EMAIL_PORT,
+    EMAIL_HOST_USER,
+    EMAIL_HOST_PASSWORD,
+    EMAIL_USE_TLS,
+)
+
+# Database
+# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+from venv_settings import DATABASES
+
+from venv_settings import (
+    DEBUG, 
+    ALLOWED_HOSTS, 
+    PORTAL_URL, 
+    SOCIALACCOUNT_PROVIDERS,
+    ADMINS,
+)
+
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=v-tn*0972ctf-r$6ckz)mr92oy&qi58qxgq*bm-ec3zg87o$r'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -52,15 +63,6 @@ INSTALLED_APPS = [
     'books',
 ]
 
-# Provider specific settings
-SOCIALACCOUNT_PROVIDERS = {
-    'facebook': {
-        'APP': {
-            'client_id': '796472358592067',
-            'secret': '69891d0a8dc184fdfaa170297c78841b',
-        }
-    }
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -92,12 +94,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'books_proj.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-from .db import DATABASES
 
 
 # Password validation
@@ -150,17 +146,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-PORTAL_URL = 'http://localhost:8000'
-
-# email settings
-from .email import (
-    EMAIL_BACKEND,
-    EMAIL_HOST,
-    EMAIL_PORT,
-    EMAIL_HOST_USER,
-    EMAIL_HOST_PASSWORD,
-    EMAIL_USE_TLS,
-)
 
 CRISPY_TEMPLATE_PACK = 'bootstrap'
 
