@@ -1,0 +1,1 @@
+web: gunicorn bookseer.wsgi --log-file -
